@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservasi Restoran</title>
+    <style>
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #ffffff; 
+            font-size: 32px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        p {
+            text-align: center;
+            margin-top: 20px;
+            color: #ffffff; 
+            font-size: 32px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0075a7;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0; 
+        }
+        .container {
+            background-color: #b0bfbf;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            position: relative;
+            top : 50px;
+            left: 600px;
+        }
+        .form-section {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .form-group label {
+            flex: 1;
+            padding-left: 10px;
+        }
+        .form-group input, .form-group select {
+            flex: 2;
+            padding: 5px;
+            margin-left: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group input[type="checkbox"] {
+            flex:none;
+            margin-left: 0;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .buttons button:active {
+            transform: scale(0.98);
+        }
+        
+        .buttons button.proses {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .buttons button.reset {
+            background-color: #f44336;
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>BLUE MOON RESTO</h1>
+    <p>selamat datang</p>
+    <p>silakan lakukan reservasi</p>
+
+    <div class="container">
+        <img src="moon.png" alt="">
+        <div class="form-section">
+            <h2>RESERVASI RESTORAN</h2>
+            <div class="form-group">
+                <label for="nama">Nama</label>
+                <input type="text" id="nama">
+                <label for="jumlah-orang">Jumlah Orang</label>
+                <input type="number" id="jumlah-orang" min="1" max="20">
+            </div>
+            <div class="form-group">
+                <label for="tanggal">Tanggal</label>
+                <input type="date" id="tanggal">
+                <label for="waktu">Waktu</label>
+                <input type="time" id="waktu">
+            </div>
+            <div class="form-group">
+                <label for="telepon">Nomor Telepon</label>
+                <input type="tel" id="telepon" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Format: 123-456-7890">
+            </div>
+            <div class="form-group">
+                <label for="vip">VIP</label>
+                <input type="checkbox" id="vip">
+            </div>
+            <div class="buttons">
+                <button class="proses" onclick="prosesData()">Proses</button>
+                <button class="reset" onclick="resetData()">Reset</button>
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <h2>Daftar Reservasi</h2>
+            <table id="daftar-reservasi">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Jumlah Orang</th>
+                        <th>Tanggal</th>
+                        <th>Waktu</th>
+                        <th>VIP</th>
+                        <th>Nomor Telepon</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data reservasi akan ditampilkan di sini -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function prosesData() {
+            var nama = document.getElementById('nama').value;
+            var jumlahOrang = document.getElementById('jumlah-orang').value;
+            var tanggal = document.getElementById('tanggal').value;
+            var waktu = document.getElementById('waktu').value;
+            var telepon = document.getElementById('telepon').value;
+            var vip = document.getElementById('vip').checked ? 'Ya' : 'Tidak';
+    
+           
+            var table = document.getElementById('daftar-reservasi').getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow(table.rows.length);
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            var cell4 = newRow.insertCell(3);
+            var cell5 = newRow.insertCell(4);
+            var cell6 = newRow.insertCell(5);
+    
+            cell1.innerHTML = nama;
+            cell2.innerHTML = jumlahOrang;
+            cell3.innerHTML = tanggal;
+            cell4.innerHTML = waktu;
+            cell5.innerHTML = vip;
+            cell6.innerHTML = telepon;
+    
+            resetData();
+        }
+    
+        function resetData() {
+            document.getElementById('nama').value = '';
+            document.getElementById('jumlah-orang').value = '';
+            document.getElementById('tanggal').value = '';
+            document.getElementById('waktu').value = '';
+            document.getElementById('telepon').value = '';
+            document.getElementById('vip').checked = false; // Reset checkbox VIP
+        }
+    </script>
+    
+    
+</body>
+</html>
